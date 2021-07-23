@@ -8,7 +8,7 @@
 class AnimatedSprite : public Sprite
 {
 public:
-    AnimatedSprite(std::string path, int w, int h, unsigned int rows, unsigned int cols, SDL_Renderer* renderer);
+    AnimatedSprite(std::string path, int w, int h, int rows, int cols, SDL_Renderer* renderer);
     AnimatedSprite(const AnimatedSprite& other);
 
     void setFrame(int frame);
@@ -18,7 +18,7 @@ public:
     virtual void draw() override;
 
 private:
-    unsigned int m_rows;
-    unsigned int m_cols;
-    unsigned int m_currentFrame;
+    int m_rows;
+    int m_cols;
+    int m_currentFrame;
 };

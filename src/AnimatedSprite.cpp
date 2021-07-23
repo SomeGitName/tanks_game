@@ -1,6 +1,6 @@
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(std::string path, int w, int h, unsigned int rows, unsigned int cols, SDL_Renderer* renderer)
+AnimatedSprite::AnimatedSprite(std::string path, int w, int h, int rows, int cols, SDL_Renderer* renderer)
     : Sprite(path, w, h, renderer), m_rows(rows), m_cols(cols)
 {
     m_currentFrame = 0;
@@ -16,7 +16,8 @@ AnimatedSprite::AnimatedSprite(const AnimatedSprite& other)
 
 void AnimatedSprite::setFrame(int frame)
 {
-    m_currentFrame = frame % (m_rows * m_cols);
+    if (frame >= 0 && frame < m_rows * m_cols)
+        m_currentFrame = frame;
 }
 
 void AnimatedSprite::nextFrame()
