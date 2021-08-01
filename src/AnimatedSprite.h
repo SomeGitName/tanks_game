@@ -8,7 +8,7 @@
 class AnimatedSprite : public Sprite
 {
 public:
-    AnimatedSprite(std::string path, int w, int h, int rows, int cols, SDL_Renderer* renderer);
+    AnimatedSprite(std::string path, int w, int h, int rows, int cols, SDL_Renderer* renderer, float scale = 1.0f);
     AnimatedSprite(const AnimatedSprite& other);
 
     void setFrame(int frame);

@@ -21,6 +21,8 @@ public:
     void render();
     void update();
 
+    void addOnClick(std::shared_ptr<IEventCallback> action);
+
 private:
     Vector2d<int> m_position;
     Vector2d<int> m_transform;

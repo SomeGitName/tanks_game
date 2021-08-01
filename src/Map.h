@@ -13,6 +13,9 @@ public:
     void update();
     void render();
 
+    std::shared_ptr<MapTile> getTile(int x, int y);
+    std::shared_ptr<MapTile> getTile(Vector2d<int> pos);
+
 private:
     typedef std::shared_ptr<MapTile> MapTilePtr;
 

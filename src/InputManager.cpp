@@ -104,7 +104,7 @@ bool InputManager::shouldQuit()
     return m_shouldQuit;
 }
 
-void InputManager::addListener(unsigned int button, std::shared_ptr<IEventCallback> event)
+void InputManager::addOnKeyPress(unsigned int button, std::shared_ptr<IEventCallback> event)
 {
     m_events[button].addListener(event);
 }

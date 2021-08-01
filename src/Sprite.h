@@ -9,7 +9,7 @@
 class Sprite
 {
 public:
-    Sprite(std::string path, int w, int h, SDL_Renderer* renderer);
+    Sprite(std::string path, int w, int h, SDL_Renderer* renderer, float scale = 1.0f);
     Sprite(const Sprite& other);
 
 
@@ -21,6 +21,8 @@ public:
 
 protected:
     void loadTexture(std::string path);
+
+    float m_scale;
 
     SDL_Renderer* m_renderer;
     SDL_Texture* m_texture;

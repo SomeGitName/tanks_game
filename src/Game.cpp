@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "SceneMenu.h"
+#include "SceneGame.h"
 #include "InputManager.h"
 
 #include <iostream>
@@ -16,7 +17,7 @@ Game::Game(int width, int height, std::string title)
     m_shouldClose = false;
 
     SDL_Init(SDL_INIT_EVERYTHING);
-    m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight, 0);
+    m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight, SDL_WINDOW_FULLSCREEN);
     if (!m_window)
     {
         std::cerr << "Failed to create window" << std::endl;
@@ -31,7 +32,7 @@ Game::Game(int width, int height, std::string title)
     Input.init();
 
     m_sceneManager = new SceneManager();
-    m_sceneManager->currentScene = new SceneMenu(m_window, m_renderer);
+    m_sceneManager->currentScene = new SceneGame(m_window, m_renderer);
 
 }
 

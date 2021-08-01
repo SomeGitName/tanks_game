@@ -40,8 +40,8 @@ SceneMenu::SceneMenu(SDL_Window* window, SDL_Renderer* renderer)
     // InputManager::getInstance().addListener(SDLK_a, callback2);
 
 
-
-    auto map = std::make_shared<Map>(5, 5, 64, std::make_shared<AnimatedSprite>("../res/map.png", 64, 64, 3, 5, m_renderer));
+    auto spritem = std::make_shared<AnimatedSprite>("../res/map.png", 64, 64, 3, 5, m_renderer, 0.5f);
+    auto map = std::make_shared<Map>(30, 16, 32, spritem);
 
     m_gameObjects.push_back(map);
 

@@ -29,6 +29,8 @@ public:
 
     void changeType(int type);
 
+    void randomType();
+
 private:
     std::shared_ptr<AnimatedSprite> m_sprite;
     Vector2d<int> m_position;

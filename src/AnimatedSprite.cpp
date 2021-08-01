@@ -1,7 +1,7 @@
 #include "AnimatedSprite.h"
 
-AnimatedSprite::AnimatedSprite(std::string path, int w, int h, int rows, int cols, SDL_Renderer* renderer)
-    : Sprite(path, w, h, renderer), m_rows(rows), m_cols(cols)
+AnimatedSprite::AnimatedSprite(std::string path, int w, int h, int rows, int cols, SDL_Renderer* renderer, float scale)
+    : Sprite(path, w, h, renderer, scale), m_rows(rows), m_cols(cols)
 {
     m_currentFrame = 0;
 }
@@ -47,6 +47,8 @@ void AnimatedSprite::draw()
     dst = src;
     dst.x = m_position.x;
     dst.y = m_position.y;
+    dst.w = (int) m_transform.x * m_scale;
+    dst.h = (int) m_transform.y * m_scale;
 
     SDL_RenderCopy(m_renderer, m_texture, &src, &dst);
 }

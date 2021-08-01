@@ -1,5 +1,6 @@
 #include "MapTile.h"
 
+
 MapTile::MapTile(std::shared_ptr<AnimatedSprite> sprite, Vector2d<int> pos, int type)
     : m_position(pos), m_type(type)
 {
@@ -26,4 +27,10 @@ void MapTile::render()
 void MapTile::changeType(int type)
 {
     m_type = type;
+    m_sprite->setFrame(m_type);
+}
+
+void MapTile::randomType()
+{
+    changeType(m_type + 1);
 }

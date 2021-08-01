@@ -32,3 +32,8 @@ void Button::render()
 {
     m_buttonSprite->draw();
 }
+
+void Button::addOnClick(std::shared_ptr<IEventCallback> action)
+{
+    event.addListener(action);
+}

@@ -4,12 +4,13 @@
 
 #include <iostream>
 
-Sprite::Sprite(std::string path, int w, int h, SDL_Renderer* renderer)
+Sprite::Sprite(std::string path, int w, int h, SDL_Renderer* renderer, float scale)
 {
     m_renderer = renderer;
     loadTexture(path);
     m_transform.x = w;
     m_transform.y = h;
+    m_scale = scale;
 }
 
 Sprite::Sprite(const Sprite& other)
@@ -18,6 +19,7 @@ Sprite::Sprite(const Sprite& other)
     this->m_texture = other.m_texture;
     this->m_transform = other.m_transform;
     this->m_position = other.m_position;
+    this->m_scale = other.m_scale;
 }
 
 
@@ -57,6 +59,8 @@ void Sprite::draw()
     dst = src;
     dst.x = m_position.x;
     dst.y = m_position.y;
+    dst.w = (int) m_transform.x * m_scale;
+    dst.h = (int) m_transform.y * m_scale;
 
     SDL_RenderCopy(m_renderer, m_texture, &src, &dst);
 }

@@ -45,7 +45,7 @@ public:
     };
 
 
-    void addListener(unsigned int button, std::shared_ptr<IEventCallback> event);
+    void addOnKeyPress(unsigned int button, std::shared_ptr<IEventCallback> event);
     
     
 private:
