@@ -24,7 +24,7 @@ public:
     void update();
 
     void addHitbox(std::shared_ptr<Hitbox> hitbox);
-    void removeHitbox(const Hitbox& hitbox);
+    void removeHitbox(std::shared_ptr<Hitbox> hitbox);
 
 
 

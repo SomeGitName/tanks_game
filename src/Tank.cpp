@@ -5,11 +5,11 @@
 Tank::Tank(std::shared_ptr<Sprite> bodySprite, Vector2d<float> position)
     : m_bodySprite(bodySprite), m_position(position)
 {
-    
 }
 
 void Tank::update()
 {
+    
 }
 
 void Tank::render()

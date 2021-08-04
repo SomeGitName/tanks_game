@@ -17,7 +17,7 @@ find_package(SDL2_image REQUIRED)
 # target_include_directories(external.sdl2 INTERFACE ${SDL2_INCLUDE_DIRS})
 # target_link_libraries(external.sdl2 INTERFACE ${SDL2_LIBRARIES})
 
-add_executable(TanksGame src/AnimatedSprite.cpp src/Button.cpp src/CollisionDetector.cpp src/Event.cpp src/EventCallback.cpp src/Game.cpp src/Hitbox.cpp src/InputManager.cpp src/main.cpp  src/Map.cpp src/MapTile.cpp src/Scene.cpp src/SceneGame.cpp src/SceneMenu.cpp src/Sprite.cpp src/Tank.cpp)
+add_executable(TanksGame src/AnimatedSprite.cpp src/Button.cpp src/CollisionDetector.cpp src/Event.cpp src/EventCallback.cpp src/Game.cpp src/Hitbox.cpp src/HitboxSquare.cpp src/InputManager.cpp src/main.cpp  src/Map.cpp src/MapTile.cpp src/Scene.cpp src/SceneGame.cpp src/SceneMenu.cpp src/Sprite.cpp src/Tank.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

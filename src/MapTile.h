@@ -3,10 +3,10 @@
 #include "Sprite.h"
 #include "AnimatedSprite.h"
 #include "Vector2d.h"
+#include "HitboxSquare.h"
 
 #include <memory>
 
-// class Map;
 
 class MapTile : public GameObject 
 {
@@ -31,10 +31,11 @@ public:
 
     void randomType();
 
+    const std::string getClassName() const { return "MapTile"; }
+
 private:
     std::shared_ptr<AnimatedSprite> m_sprite;
     Vector2d<int> m_position;
     int m_type;
-    // std::shared_ptr<Map> m_map;
 
 };

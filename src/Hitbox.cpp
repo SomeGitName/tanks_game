@@ -1,17 +1,16 @@
 #include "Hitbox.h"
 
-
-Hitbox::Hitbox(ICollidablePtr go, int x, int y, int w, int h)
-    : IHitbox(go)
+void Hitbox::setOnCollision(std::string hitboxType, std::function<void(const Hitbox&)> callback)
 {
-    m_hitbox = {x, y, w, h};
-}   
-
-void Hitbox::collide(const IHitbox& other)
-{
+    m_callbacks[hitboxType] = callback;
 }
 
-SDL_Rect Hitbox::getRect() const
-{
-    return m_hitbox;
-}
+ void Hitbox::onCollision(const Hitbox& other)
+ {
+     if (m_callbacks[other.getClassName()])
+     {
+        auto callback = m_callbacks[other.getClassName()];
+        callback(other);
+     }
+ }
+    

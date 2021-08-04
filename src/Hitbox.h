@@ -2,39 +2,39 @@
 #include "GameObject.h"
 #include "Vector2d.h"
 #include "ICollidable.h"
+#include "Event.h"
+#include "Vector2d.h"
 
 #include <SDL2/SDL.h>
 
 #include <memory>
+#include <map>
+#include <string>
 
-class IHitbox
+class Hitbox
 {
 public:
-    using ICollidablePtr = std::shared_ptr<ICollidable>;
+    using GameObjectPtr = std::shared_ptr<GameObject>;
 
-    IHitbox(ICollidablePtr go)
-        : m_gameObject(go) {}
+    Hitbox(GameObjectPtr go)
+        : m_go(go) {}
 
-    virtual void collide(const IHitbox& other) = 0;
+    virtual ~Hitbox() = default;
 
-    const ICollidable& getObject() const
-    {
-        return *m_gameObject;
-    }
+    
+
+    virtual bool collide(const Hitbox& other) = 0;
+    virtual void setOnCollision(std::string hitboxType, std::function<void(const Hitbox&)> callback);
+    
+    virtual void onCollision(const Hitbox& other);
+    
+    const GameObject& getObject() const { return *m_go; }
+
+    const std::string getClassName() const { return "Hitbox";}
 
 protected:
-    ICollidablePtr m_gameObject;
+    std::map<std::string, std::function<void(const Hitbox&)>> m_callbacks;
+
+    GameObjectPtr m_go;
 };
 
-class Hitbox : public IHitbox
-{
-public:
-    Hitbox(ICollidablePtr go, int x, int y, int w, int h);
-
-    void collide(const IHitbox& other);
-
-    SDL_Rect getRect() const;
-
-private:
-    SDL_Rect m_hitbox;
-};

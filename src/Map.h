@@ -4,6 +4,7 @@
 
 #include <vector>
 
+
 class Map : public GameObject
 {
 public:
@@ -16,6 +17,9 @@ public:
     std::shared_ptr<MapTile> getTile(int x, int y);
     std::shared_ptr<MapTile> getTile(Vector2d<int> pos);
 
+    int getTileSize() { return m_tileSize; }
+
+    const std::string getClassName() const { return "Map"; }
 private:
     typedef std::shared_ptr<MapTile> MapTilePtr;
 

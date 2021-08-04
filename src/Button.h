@@ -23,6 +23,8 @@ public:
 
     void addOnClick(std::shared_ptr<IEventCallback> action);
 
+    const std::string getClassName() const { return "Button"; }
+    
 private:
     Vector2d<int> m_position;
     Vector2d<int> m_transform;
@@ -30,5 +32,6 @@ private:
 
     bool m_released;
 
+    
 
 };

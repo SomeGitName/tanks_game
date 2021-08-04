@@ -16,5 +16,4 @@ namespace Random
         return r;
     }
 
-
 } 
