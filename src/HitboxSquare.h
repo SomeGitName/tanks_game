@@ -5,9 +5,9 @@
 class HitboxSquare : public Hitbox
 {
 public:
-    HitboxSquare(GameObjectPtr go, int x, int y, int w, int h);
+    HitboxSquare(GameObject* go, int x, int y, int w, int h);
 
-    bool collide(const Hitbox& other);
+    bool collide(std::shared_ptr<Hitbox> other);
 
     void move(Vector2d<int> pos);
 

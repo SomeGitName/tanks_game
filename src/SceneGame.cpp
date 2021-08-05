@@ -5,6 +5,7 @@
 #include "EventCallback.h"
 #include "InputManager.h"
 #include "Tank.h"
+#include "A.h"
 
 #include <functional>
 
@@ -26,7 +27,13 @@ SceneGame::SceneGame(SDL_Window* window, SDL_Renderer* renderer)
 
     // InputManager::getInstance().addOnKeyPress(SDLK_w, callback);
 
+    auto sprite = std::make_shared<Sprite>("../res/tank.png", 32, 32, m_renderer);
+    auto a = std::make_shared<A>(Vector2d<int>(500, 500), Vector2d<float>(1, 0), sprite);
+    m_gameObjects.push_back(a);
 
+    auto b = std::make_shared<A>(Vector2d<int>(600, 500), Vector2d<float>(0, 0), sprite);
+    m_gameObjects.push_back(b);
+    
 
  }   
 

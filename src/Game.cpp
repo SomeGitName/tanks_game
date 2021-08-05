@@ -2,6 +2,7 @@
 #include "SceneMenu.h"
 #include "SceneGame.h"
 #include "InputManager.h"
+#include "CollisionDetector.h"
 
 #include <iostream>
 
@@ -44,8 +45,25 @@ void Game::mainLoop()
 
         if (Input.shouldQuit() || Input.isKeyDown(SDL_SCANCODE_ESCAPE))
             m_shouldClose = true;
+        
+        // pause --------
+        if (Input.isKeyDown(SDL_SCANCODE_P))
+        {   
+            bool paused = true;
+            while (paused)
+            {
+                SDL_Delay(10);
+                Input.update();
+                if (Input.isKeyDown(SDL_SCANCODE_P))
+                {
+                    paused = false;
+                }
+            }
+        }
+        // --------------
 
         update();
+        CollisionDetector::getInstance().update();
         render();
 
     }

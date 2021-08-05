@@ -21,7 +21,7 @@ void CollisionDetector::update()
         {
             if (i != j)
             {
-                if (i->collide(*j))
+                if (i->collide(j))
                 {
                     i->onCollision(*j);
                     j->onCollision(*i);
@@ -33,8 +33,15 @@ void CollisionDetector::update()
 
 void CollisionDetector::addHitbox(std::shared_ptr<Hitbox> hitbox) 
 {
-    removeHitbox(hitbox);
-    m_hitboxes.push_back(hitbox);
+    auto toFind = std::find(m_hitboxes.begin(), m_hitboxes.end(), hitbox);
+    if (toFind != m_hitboxes.end())
+    {
+        std::cerr << "Hitbox already was added" << std::endl;
+    }
+    else
+    {
+        m_hitboxes.push_back(hitbox);
+    }
 }
 
 void CollisionDetector::removeHitbox(std::shared_ptr<Hitbox> hitbox)
