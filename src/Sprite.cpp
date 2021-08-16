@@ -4,9 +4,10 @@
 
 #include <iostream>
 
-Sprite::Sprite(std::string path, int w, int h, SDL_Renderer* renderer, float scale)
+SDL_Renderer* Sprite::m_renderer = NULL;
+
+Sprite::Sprite(std::string path, int w, int h, float scale)
 {
-    m_renderer = renderer;
     loadTexture(path);
     m_transform.x = w;
     m_transform.y = h;
@@ -15,13 +16,16 @@ Sprite::Sprite(std::string path, int w, int h, SDL_Renderer* renderer, float sca
 
 Sprite::Sprite(const Sprite& other)
 {
-    this->m_renderer = other.m_renderer;
     this->m_texture = other.m_texture;
     this->m_transform = other.m_transform;
     this->m_position = other.m_position;
     this->m_scale = other.m_scale;
 }
 
+void Sprite::setRenderer(SDL_Renderer* renderer)
+{
+    Sprite::m_renderer = renderer;    
+}
 
 void Sprite::setPosition(int x, int y)
 {
@@ -64,3 +68,23 @@ void Sprite::draw()
 
     SDL_RenderCopy(m_renderer, m_texture, &src, &dst);
 }
+
+void Sprite::drawRotated(double angle)
+{
+    SDL_Rect src;
+    SDL_Rect dst;
+
+    src.x = 0;
+    src.y = 0;
+    src.w = m_transform.x;
+    src.h = m_transform.y;
+
+    dst = src;
+    dst.x = m_position.x;
+    dst.y = m_position.y;
+    dst.w = (int) m_transform.x * m_scale;
+    dst.h = (int) m_transform.y * m_scale;
+
+    SDL_RenderCopyEx(m_renderer, m_texture, &src, &dst, angle, NULL, SDL_FLIP_NONE);
+}
+

@@ -24,9 +24,18 @@ void InputManager::update()
             // Keyboard keys: -----------
 
             case SDL_KEYDOWN:
-                m_events[e.key.keysym.sym].fire();
-                break;
+                m_eventsOnKeyDown[e.key.keysym.sym].fire();
 
+                if (!m_isKeyDown[e.key.keysym.sym].val)
+                {
+                    m_isKeyDown[e.key.keysym.sym].val = true;
+                    m_eventsOnSinglePress[e.key.keysym.sym].fire();
+                }
+                break;
+            
+            case SDL_KEYUP:
+                m_isKeyDown[e.key.keysym.sym].val = false;
+                break;
 
             // ---------------------------
 
@@ -104,7 +113,12 @@ bool InputManager::shouldQuit()
     return m_shouldQuit;
 }
 
-void InputManager::addOnKeyPress(unsigned int button, std::shared_ptr<IEventCallback> event)
+void InputManager::addOnKeyDown(unsigned int button, std::shared_ptr<IEventCallback> callback)
 {
-    m_events[button].addListener(event);
+    m_eventsOnKeyDown[button].addListener(callback);
+}
+
+void InputManager::addOnKeyPress(unsigned int button, std::shared_ptr<IEventCallback> callback)
+{
+    m_eventsOnSinglePress[button].addListener(callback);
 }

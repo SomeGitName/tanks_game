@@ -13,10 +13,10 @@
 class A : public GameObject
 {
 public:
-    A(Vector2d<int> pos, Vector2d<float> vel, std::shared_ptr<Sprite> sprite)
+    A(Vector2d<int> pos, Vector2d<float> vel, std::shared_ptr<AnimatedSprite> sprite)
     {
-        m_sprite = std::make_shared<Sprite>(*sprite);
-        m_hitbox = std::make_shared<HitboxSquare>(this, pos.x, pos.y, 32, 32);
+        m_sprite = std::make_shared<AnimatedSprite>(*sprite);
+        m_hitbox = std::make_shared<HitboxSquare>(this, pos.x, pos.y, 64, 64);
 
         std::function<void(const Hitbox&)> f = std::bind(&A::print, this, std::placeholders::_1);
         m_hitbox->setOnCollision("HitboxSquare", f);
@@ -45,17 +45,24 @@ public:
         m_sprite->setPosition(posInt);
         m_hitbox->move(posInt);
 
+        if (m_count == 0)
+            m_sprite->setFrame(3);
+        m_count = 0;
+
     }
 
     void print(const Hitbox& other)
     {
-        std::cout << "Lala\n" << std::endl;
+        m_sprite->setFrame(1);
+        m_count = 1;
     }
 
 private:
-    std::shared_ptr<Sprite> m_sprite;
+    std::shared_ptr<AnimatedSprite> m_sprite;
     std::shared_ptr<HitboxSquare> m_hitbox;
 
     Vector2d<float> m_pos;
     Vector2d<float> m_vel;
+
+    int m_count = 0;
 };

@@ -17,6 +17,6 @@ void Tank::render()
     int x = InputManager::getInstance().getMousePosition().x;
     int y = InputManager::getInstance().getMousePosition().y;
     m_bodySprite->setPosition(x, y);
-    m_bodySprite->draw();
-
+    // m_bodySprite->draw();
+    m_bodySprite->drawRotated(180);
 }

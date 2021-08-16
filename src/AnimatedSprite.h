@@ -8,7 +8,7 @@
 class AnimatedSprite : public Sprite
 {
 public:
-    AnimatedSprite(std::string path, int w, int h, int rows, int cols, SDL_Renderer* renderer, float scale = 1.0f);
+    AnimatedSprite(std::string path, int w, int h, int rows, int cols, float scale = 1.0f);
     AnimatedSprite(const AnimatedSprite& other);
 
     void setFrame(int frame);
@@ -16,6 +16,7 @@ public:
     void prevFrame();
 
     virtual void draw() override;
+    virtual void drawRotated(double angle) override;
 
 private:
     int m_rows;

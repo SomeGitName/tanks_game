@@ -45,7 +45,9 @@ public:
     };
 
 
-    void addOnKeyPress(unsigned int button, std::shared_ptr<IEventCallback> event);
+    void addOnKeyDown(unsigned int button, std::shared_ptr<IEventCallback> callback);
+
+    void addOnKeyPress(unsigned int button, std::shared_ptr<IEventCallback> callback);
     
     
 private:
@@ -53,9 +55,15 @@ private:
     Vector2d<int> m_mousePosition;
 
     Uint8* m_keyStates;    
-
     bool m_shouldQuit;
 
-    std::map<unsigned int, Event> m_events;
+    std::map<unsigned int, Event> m_eventsOnKeyDown;
+
+    struct BoolDefaultedToFalse
+    {
+        bool val = false;
+    };
+    std::map<unsigned int, BoolDefaultedToFalse> m_isKeyDown;
+    std::map<unsigned int, Event> m_eventsOnSinglePress;
 
 };

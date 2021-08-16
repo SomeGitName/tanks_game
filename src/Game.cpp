@@ -3,6 +3,7 @@
 #include "SceneGame.h"
 #include "InputManager.h"
 #include "CollisionDetector.h"
+#include "EventCallback.h"
 
 #include <iostream>
 
@@ -16,6 +17,7 @@ Game::Game(int width, int height, std::string title)
     m_renderer = NULL;
     m_shouldClose = true;
     m_shouldClose = false;
+    m_paused = false;
 
     SDL_Init(SDL_INIT_EVERYTHING);
     m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_windowWidth, m_windowHeight, SDL_WINDOW_FULLSCREEN);
@@ -29,41 +31,28 @@ Game::Game(int width, int height, std::string title)
         std::cerr << "Failed to create renderer" << std::endl;
     }
 
+    Sprite::setRenderer(m_renderer);
 
     Input.init();
 
     m_sceneManager = new SceneManager();
     m_sceneManager->currentScene = new SceneGame(m_window, m_renderer);
 
+
+    auto pauseCallback = std::bind(&Game::togglePause, this);
+    Input.addOnKeyPress(SDLK_p, std::make_shared<EventCallbackNew>(pauseCallback));
 }
 
 void Game::mainLoop()
 {
     while (!m_shouldClose)
     {
-        Input.update();
+        handleInput();
 
-        if (Input.shouldQuit() || Input.isKeyDown(SDL_SCANCODE_ESCAPE))
-            m_shouldClose = true;
-        
-        // pause --------
-        if (Input.isKeyDown(SDL_SCANCODE_P))
-        {   
-            bool paused = true;
-            while (paused)
-            {
-                SDL_Delay(10);
-                Input.update();
-                if (Input.isKeyDown(SDL_SCANCODE_P))
-                {
-                    paused = false;
-                }
-            }
-        }
-        // --------------
-
-        update();
-        CollisionDetector::getInstance().update();
+        if (!m_paused)
+        {
+            update();
+        }        
         render();
 
     }
@@ -72,6 +61,7 @@ void Game::mainLoop()
 
 void Game::update()
 {
+    CollisionDetector::getInstance().update();
     m_sceneManager->currentScene->update();
 }
 
@@ -82,5 +72,20 @@ void Game::render()
 
 void Game::handleInput()
 {
+    Input.update();
 
+    if (Input.shouldQuit() || Input.isKeyDown(SDL_SCANCODE_ESCAPE))
+        m_shouldClose = true;
+}
+
+void Game::togglePause()
+{
+    m_paused = !m_paused;
+}
+
+void Game::exit()
+{
+    // TODO: clean stuff
+
+    m_shouldClose = true;
 }

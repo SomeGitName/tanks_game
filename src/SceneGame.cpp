@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "Tank.h"
 #include "A.h"
+#include "Bullet.h"
 
 #include <functional>
 
@@ -25,15 +26,19 @@ SceneGame::SceneGame(SDL_Window* window, SDL_Renderer* renderer)
     // button->addOnClick(callback);
 
 
-    // InputManager::getInstance().addOnKeyPress(SDLK_w, callback);
+    // InputManager::getInstance().addOnKeyDown(SDLK_w, callback);
 
-    auto sprite = std::make_shared<Sprite>("../res/tank.png", 32, 32, m_renderer);
+    auto sprite = std::make_shared<AnimatedSprite>("../res/map.png", 64, 64, 3, 5);
+    sprite->setFrame(3);
     auto a = std::make_shared<A>(Vector2d<int>(500, 500), Vector2d<float>(1, 0), sprite);
     m_gameObjects.push_back(a);
 
-    auto b = std::make_shared<A>(Vector2d<int>(600, 500), Vector2d<float>(0, 0), sprite);
+    auto b = std::make_shared<A>(Vector2d<int>(1000, 500), Vector2d<float>(0, 0), sprite);
     m_gameObjects.push_back(b);
     
+   
+    auto bullet = std::make_shared<Bullet>(Vector2d<int>(20, 20), 0, Vector2d<float>(0, 0));
+    m_gameObjects.push_back(bullet);
 
  }   
 

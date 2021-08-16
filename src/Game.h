@@ -16,11 +16,21 @@ public:
     void render();
     void handleInput();
 
+    /**
+     * Toggle pause mode
+     * 
+     * @note all systems are stopped during pause
+     */
+    void togglePause();
+
+    void exit();
+
 
 private:
     int m_windowWidth;
     int m_windowHeight;
     std::string m_title;
+    bool m_paused;
 
     SDL_Window* m_window;
     SDL_Renderer* m_renderer;
@@ -28,5 +38,6 @@ private:
     bool m_shouldClose;
 
     SceneManager* m_sceneManager;
+
     
 };

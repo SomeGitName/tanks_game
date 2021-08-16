@@ -25,7 +25,7 @@ bool HitboxSquare::collide(std::shared_ptr<Hitbox> other)
     }
     else if (otherType == "HitboxCircle")
     {
-
+        
     }
     else 
     {

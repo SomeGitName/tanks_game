@@ -12,10 +12,10 @@
 SceneMenu::SceneMenu(SDL_Window* window, SDL_Renderer* renderer)
     : Scene(window, renderer)
 {
-    auto sprite = std::make_shared<Sprite>("../res/tank.png", 32, 32, m_renderer);
+    auto sprite = std::make_shared<Sprite>("../res/tank.png", 32, 32);
     m_gameObjects.push_back(std::make_shared<Tank>(sprite));
 
-    auto sprite2 = std::make_shared<Sprite>("../res/button.png", 100, 50, m_renderer);
+    auto sprite2 = std::make_shared<Sprite>("../res/button.png", 100, 50);
     auto btn = std::make_shared<Button>(sprite2, Vector2d<int>(400, 400), Vector2d<int>(100, 50));
     m_gameObjects.push_back(btn);
 
@@ -40,7 +40,7 @@ SceneMenu::SceneMenu(SDL_Window* window, SDL_Renderer* renderer)
     // InputManager::getInstance().addListener(SDLK_a, callback2);
 
 
-    auto spritem = std::make_shared<AnimatedSprite>("../res/map.png", 64, 64, 3, 5, m_renderer, 0.5f);
+    auto spritem = std::make_shared<AnimatedSprite>("../res/map.png", 64, 64, 3, 5, 0.5f);
     auto map = std::make_shared<Map>(30, 16, 32, spritem);
 
     m_gameObjects.push_back(map);
